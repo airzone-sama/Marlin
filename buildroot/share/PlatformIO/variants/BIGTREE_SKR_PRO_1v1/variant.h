@@ -234,7 +234,7 @@ extern "C" {
 
 // On-board LED pin number
 #define LED_BUILTIN             PA7
-//#define LED_GREEN             LED_BUILTIN   should be defined here but omitted to avoid redefinition in SailfishRGB_LED
+#define LED_GREEN               LED_BUILTIN
 
 // Below SPI and I2C definitions already done in the core
 // Could be redefined here if differs from the default one
@@ -245,16 +245,19 @@ extern "C" {
 #define PIN_SPI_SS              PB12
 
 // I2C Definitions
-#define PIN_WIRE_SDA            PB7
-#define PIN_WIRE_SCL            PB6
+#if STM32F4X_PIN_NUM >= 176
+  #define PIN_WIRE_SDA          PH5
+  #define PIN_WIRE_SCL          PH4
+#else
+  #define PIN_WIRE_SDA          PB7
+  #define PIN_WIRE_SCL          PB6
+#endif
 
 // Timer Definitions
 //Do not use timer used by PWM pins when possible. See PinMap_PWM in PeripheralPins.c
 #define TIMER_TONE              TIM2
+#define TIMER_SERVO             TIM5 // Only 1 Servo PIN on SKR-PRO, so use the same timer as defined in PeripheralPins
 #define TIMER_SERIAL            TIM7
-
-// Do not use basic timer: OC is required
-#define TIMER_SERVO             TIM6  //TODO: advanced-control timers don't work
 
 // UART Definitions
 //#define ENABLE_HWSERIAL1        done automatically by the #define SERIAL_UART_INSTANCE below
