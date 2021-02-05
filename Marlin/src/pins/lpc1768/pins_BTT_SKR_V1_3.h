@@ -107,8 +107,11 @@
   #define E0_CS_PIN        P1_08
 #endif
 
-#ifndef E1_CS_PIN
-  #define E1_CS_PIN        P1_01
+#define Z2_STEP_PIN        P0_01
+#define Z2_DIR_PIN         P0_00
+#define Z2_ENABLE_PIN      P0_10
+#ifndef Z2_CS_PIN
+  #define Z2_CS_PIN        P1_01
 #endif
 
 //
